@@ -33,6 +33,10 @@ class Transfer
     #   @sender.deposit( @amount ) 
     #   @receiver.deposit( @amount * -1)
     #   @status = "reversed"
+    if valid? && receiver.balance > amount && self.status == "complete"
+      receiver.balance -= amount
+      sender.balance += amount
+      self.status = "reversed"
     end
   end
 end
